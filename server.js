@@ -6,11 +6,11 @@ const app = express();
 
 app.use(express.json());
 
-app.get("/api/message", (req, res) => {
+app.get("/api/message", (_req, res) => {
   res.json({ message: "Hello from server!" });
 });
 
-app.get("/api/schedules", (req, res) => {
+app.get("/api/schedules", (_req, res) => {
   Schedule.findAll()
     .then((schedules) => {
       res.json({ schedules });
@@ -44,6 +44,6 @@ app.post("/api/schedules", (req, res) => {
 });
 
 app.listen(3000, () => {
-  Schedule.sync({ force: true });
+  Schedule.sync({ alter: true });
   console.log("Server listening on port 3000!");
 });

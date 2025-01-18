@@ -12,7 +12,7 @@ function convertTo24HourFormat(time) {
         throw new Error('Invalid time format');
     }
 
-    let [ , hourStr, minute = '00', second = '00', period ] = match;
+    const [ , hourStr, minute = '00', second = '00', period ] = match;
     let hour = parseInt(hourStr, 10);
 
     // Validate hour, minute, and second values
