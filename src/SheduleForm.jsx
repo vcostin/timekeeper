@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import './SheduleForm.css'
 
 const ScheduleForm = () => {
   const [name, setName] = useState("");
@@ -38,33 +39,6 @@ const ScheduleForm = () => {
           onChange={(event) => setName(event.target.value)}
         />
       </label>
-      <br />
-      <label>
-        Open Time:
-        <input
-          type="datetime-local"
-          value={openTime}
-          onChange={(event) => setOpenTime(event.target.value)}
-        />
-      </label>
-      <br />
-      <label>
-        Close Time:
-        <input
-          type="datetime-local"
-          value={closeTime}
-          onChange={(event) => setCloseTime(event.target.value)}
-        />
-      </label>
-      <br />
-      <label>
-        Comment:
-        <textarea
-          value={comment}
-          onChange={(event) => setComment(event.target.value)}
-        />
-      </label>
-      <br />
       <label>
         URL:
         <input
@@ -73,7 +47,29 @@ const ScheduleForm = () => {
           onChange={(event) => setUrl(event.target.value)}
         />
       </label>
-      <br />
+      <label>
+        Open Time:
+        <input
+          type="datetime-local"
+          value={openTime}
+          onChange={(event) => setOpenTime(event.target.value)}
+        />
+      </label>
+      <label>
+        Close Time:
+        <input
+          type="datetime-local"
+          value={closeTime}
+          onChange={(event) => setCloseTime(event.target.value)}
+        />
+      </label>
+      <label>
+        Comment:
+        <textarea
+          value={comment}
+          onChange={(event) => setComment(event.target.value)}
+        />
+      </label>
       <button type="submit">Create Schedule</button>
     </form>
   );
