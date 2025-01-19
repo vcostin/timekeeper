@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import ScheduleList from "./ScheduleList.jsx";
+import React, { useState, useEffect } from "react";
 import ScheduleForm from "./ScheduleForm.jsx";
+import ScheduleList from "./ScheduleList.jsx";
 
-const ScheduleListContainer = () => {
+const ScheduleContainer = () => {
   const [schedules, setSchedules] = useState([]);
 
   const fetchSchedules = () => {
@@ -15,13 +15,36 @@ const ScheduleListContainer = () => {
   useEffect(() => {
     fetchSchedules();
   }, []);
+
+  const handleDeleteSchedule = (id) => {
+    fetch(`/api/schedules/${id}`, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        if (response.ok) {
+          fetchSchedules();
+        } else {
+          console.error("Failed to delete schedule");
+        }
+      })
+      .catch((error) => console.error(error));
+  };
+
+  const handleEditSchedule = (id) => {
+    // Implement edit functionality
+    console.log("Edit schedule with ID:", id);
+  };
+
   return (
-    <div className="SheduleListContainer">
+    <div>
       <ScheduleForm onScheduleCreated={fetchSchedules} />
-      <h1>Schedule List</h1>
-      <ScheduleList schedules={schedules} />
+      <ScheduleList
+        schedules={schedules}
+        onDeleteSchedule={handleDeleteSchedule}
+        onEditSchedule={handleEditSchedule}
+      />
     </div>
   );
 };
 
-export default ScheduleListContainer;
+export default ScheduleContainer;

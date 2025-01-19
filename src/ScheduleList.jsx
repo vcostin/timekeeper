@@ -2,7 +2,7 @@ import React from "react";
 import "./ScheduleList.css";
 import { formatToLocalTime } from "../utilities/localization";
 
-const ScheduleList = ({ schedules }) => {
+const ScheduleList = ({ schedules, onDeleteSchedule, onEditSchedule }) => {
   return (
     <ul className="ScheduleList">
       <li className="header">Name</li>
@@ -10,6 +10,7 @@ const ScheduleList = ({ schedules }) => {
       <li className="header">Close Time</li>
       <li className="header">Comment</li>
       <li className="header">URL</li>
+      <li className="header">Actions</li>
       {schedules.map((schedule) => (
         <li key={schedule.id} className="item">
           <span>{schedule.name}</span>
@@ -20,6 +21,10 @@ const ScheduleList = ({ schedules }) => {
             <a href={schedule.url} target="_blank" rel="noopener noreferrer">
               {schedule.url}
             </a>
+          </span>
+          <span className="actions">
+            <button onClick={() => onEditSchedule(schedule.id)}>Edit</button>
+            <button onClick={() => onDeleteSchedule(schedule.id)}>Delete</button>
           </span>
         </li>
       ))}

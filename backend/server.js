@@ -43,6 +43,18 @@ app.post("/api/schedules", (req, res) => {
     });
 });
 
+
+app.delete("/api/schedules/:id", async (req, res) => {
+  const { id } = req.params;
+  const schedule = await Schedule.findByPk(id);
+  if (schedule) {
+    await schedule.destroy();
+    res.status(204).send();
+  } else {
+    res.status(404).send({ error: "Schedule not found" });
+  }
+});
+
 app.listen(3000, () => {
   Schedule.sync({ alter: true });
   console.log("Server listening on port 3000!");
