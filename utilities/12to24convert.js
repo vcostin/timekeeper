@@ -5,29 +5,34 @@
  * @throws {Error} - If the input time format is invalid.
  */
 function convertTo24HourFormat(time) {
-    const timeRegex = /(\d{1,2})(?::(\d{2}))?(?::(\d{2}))?([ap]m)/i;
-    const match = time.match(timeRegex);
+  const timeRegex = /(\d{1,2})(?::(\d{2}))?(?::(\d{2}))?([ap]m)/i;
+  const match = time.match(timeRegex);
 
-    if (!match) {
-        throw new Error('Invalid time format');
-    }
+  if (!match) {
+    throw new Error("Invalid time format");
+  }
 
-    const [ , hourStr, minute = '00', second = '00', period ] = match;
-    let hour = parseInt(hourStr, 10);
+  const [, hourStr, minute = "00", second = "00", period] = match;
+  let hour = parseInt(hourStr, 10);
 
-    // Validate hour, minute, and second values
-    if (hour < 1 || hour > 12 || parseInt(minute, 10) > 59 || parseInt(second, 10) > 59) {
-        throw new Error('Invalid time format');
-    }
+  // Validate hour, minute, and second values
+  if (
+    hour < 1 || hour > 12 || parseInt(minute, 10) > 59 ||
+    parseInt(second, 10) > 59
+  ) {
+    throw new Error("Invalid time format");
+  }
 
-    if (period.toLowerCase() === 'pm' && hour !== 12) {
-        hour += 12;
-    }
-    if (period.toLowerCase() === 'am' && hour === 12) {
-        hour = 0;
-    }
+  if (period.toLowerCase() === "pm" && hour !== 12) {
+    hour += 12;
+  }
+  if (period.toLowerCase() === "am" && hour === 12) {
+    hour = 0;
+  }
 
-    return `${String(hour).padStart(2, '0')}:${minute.padStart(2, '0')}:${second.padStart(2, '0')}`;
+  return `${String(hour).padStart(2, "0")}:${minute.padStart(2, "0")}:${
+    second.padStart(2, "0")
+  }`;
 }
 
 export { convertTo24HourFormat };

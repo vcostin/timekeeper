@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import './SheduleForm.css'
+import "./ScheduleForm.css";
 
 const ScheduleForm = () => {
   const [name, setName] = useState("");
@@ -70,7 +70,9 @@ const ScheduleForm = () => {
           onChange={(event) => setComment(event.target.value)}
         />
       </label>
-      <button type="submit">Create Schedule</button>
+      <div className="button-container">
+        <button type="submit">Create Schedule</button>
+      </div>
     </form>
   );
 };

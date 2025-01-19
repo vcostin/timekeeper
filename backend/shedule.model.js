@@ -1,4 +1,4 @@
-import { Sequelize, DataTypes } from "sequelize";
+import { DataTypes, Sequelize } from "sequelize";
 
 const sequelize = new Sequelize("database", "username", "password", {
   dialect: "sqlite",
@@ -31,7 +31,7 @@ const Schedule = sequelize.define(
     url: {
       type: DataTypes.STRING,
     },
-  }
+  },
 );
 
 export default Schedule;

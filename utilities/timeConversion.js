@@ -11,15 +11,26 @@ const parseInput = (input) => {
 };
 
 const convertToISO = (time, year, month, date) => {
-  return new Date(`${year} ${month} ${date} ${time} ${TIMEZONE_OFFSET}`).toISOString();
+  return new Date(`${year} ${month} ${date} ${time} ${TIMEZONE_OFFSET}`)
+    .toISOString();
 };
 
 const convertTimesToISO = (input) => {
   const { month, date, startTime, endTime } = parseInput(input);
   const year = new Date().getFullYear(); // Use the current year
-  const startTimeISO = convertToISO(convertTo24HourFormat(startTime), year, month, date);
-  const endTimeISO = convertToISO(convertTo24HourFormat(endTime), year, month, date);
+  const startTimeISO = convertToISO(
+    convertTo24HourFormat(startTime),
+    year,
+    month,
+    date,
+  );
+  const endTimeISO = convertToISO(
+    convertTo24HourFormat(endTime),
+    year,
+    month,
+    date,
+  );
   return { startTimeISO, endTimeISO };
 };
 
-export { convertTimesToISO, parseInput, convertToISO };
+export { convertTimesToISO, convertToISO, parseInput };

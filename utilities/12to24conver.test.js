@@ -1,4 +1,7 @@
-import { assertEquals, assertThrows } from "https://deno.land/std/testing/asserts.ts";
+import {
+  assertEquals,
+  assertThrows,
+} from "https://deno.land/std/testing/asserts.ts";
 import { convertTo24HourFormat } from "./12to24convert.js";
 
 Deno.test("convertTo24HourFormat - valid inputs", () => {
@@ -12,10 +15,34 @@ Deno.test("convertTo24HourFormat - valid inputs", () => {
 });
 
 Deno.test("convertTo24HourFormat - invalid inputs", () => {
-  assertThrows(() => convertTo24HourFormat("25am"), Error, "Invalid time format");
-  assertThrows(() => convertTo24HourFormat("13pm"), Error, "Invalid time format");
-  assertThrows(() => convertTo24HourFormat("12:60pm"), Error, "Invalid time format");
-  assertThrows(() => convertTo24HourFormat("12:00:60pm"), Error, "Invalid time format");
-  assertThrows(() => convertTo24HourFormat("noon"), Error, "Invalid time format");
-  assertThrows(() => convertTo24HourFormat("midnight"), Error, "Invalid time format");
+  assertThrows(
+    () => convertTo24HourFormat("25am"),
+    Error,
+    "Invalid time format",
+  );
+  assertThrows(
+    () => convertTo24HourFormat("13pm"),
+    Error,
+    "Invalid time format",
+  );
+  assertThrows(
+    () => convertTo24HourFormat("12:60pm"),
+    Error,
+    "Invalid time format",
+  );
+  assertThrows(
+    () => convertTo24HourFormat("12:00:60pm"),
+    Error,
+    "Invalid time format",
+  );
+  assertThrows(
+    () => convertTo24HourFormat("noon"),
+    Error,
+    "Invalid time format",
+  );
+  assertThrows(
+    () => convertTo24HourFormat("midnight"),
+    Error,
+    "Invalid time format",
+  );
 });
