@@ -1,12 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ScheduleForm.css";
 
-const ScheduleForm = ({ onScheduleCreated }) => {
+const ScheduleForm = ({ onScheduleCreated, scheduleToEdit }) => {
   const [name, setName] = useState("");
   const [openTime, setOpenTime] = useState("");
   const [closeTime, setCloseTime] = useState("");
   const [comment, setComment] = useState("");
   const [url, setUrl] = useState("");
+  const [isEditing, setIsEditing] = useState(false);
+
+  useEffect(() => {
+    if (scheduleToEdit) {
+      setName(scheduleToEdit.name);
+      setOpenTime(scheduleToEdit.openTime);
+      setCloseTime(scheduleToEdit.closeTime);
+      setComment(scheduleToEdit.comment);
+      setUrl(scheduleToEdit.url);
+      setIsEditing(true);
+    } else {
+      cleanForm();
+      setIsEditing(false);
+    }
+  }, [scheduleToEdit]);
 
   const cleanForm = () => {
     setName("");
@@ -14,7 +29,7 @@ const ScheduleForm = ({ onScheduleCreated }) => {
     setCloseTime("");
     setComment("");
     setUrl("");
-  }
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -25,18 +40,24 @@ const ScheduleForm = ({ onScheduleCreated }) => {
       comment,
       url,
     };
-    fetch("/api/schedules", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+
+    const requestOptions = {
+      method: isEditing ? "PATCH" : "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(scheduleData),
-    })
+    };
+
+    const requestURL = isEditing
+      ? `/api/schedules/${scheduleToEdit.id}`
+      : "/api/schedules";
+
+    fetch(requestURL, requestOptions)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
         onScheduleCreated();
         cleanForm();
+        setIsEditing(false);
       })
       .catch((error) => console.error(error));
   };
@@ -83,7 +104,9 @@ const ScheduleForm = ({ onScheduleCreated }) => {
         />
       </label>
       <div className="button-container">
-        <button type="submit">Create Schedule</button>
+        <button type="submit">
+          {isEditing ? "Update Schedule" : "Create Schedule"}
+        </button>
       </div>
     </form>
   );

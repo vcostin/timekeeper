@@ -43,6 +43,16 @@ app.post("/api/schedules", (req, res) => {
     });
 });
 
+app.patch("/api/schedules/:id", async (req, res) => {
+  const { id } = req.params;
+  const schedule = await Schedule.findByPk(id);
+  if (schedule) {
+    await schedule.update(req.body);
+    res.json(schedule);
+  } else {
+    res.status(404).send({ error: "Schedule not found" });
+  }
+});
 
 app.delete("/api/schedules/:id", async (req, res) => {
   const { id } = req.params;

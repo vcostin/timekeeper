@@ -24,7 +24,9 @@ const ScheduleList = ({ schedules, onDeleteSchedule, onEditSchedule }) => {
           </span>
           <span className="actions">
             <button onClick={() => onEditSchedule(schedule.id)}>Edit</button>
-            <button onClick={() => onDeleteSchedule(schedule.id)}>Delete</button>
+            <button onClick={() => onDeleteSchedule(schedule.id)}>
+              Delete
+            </button>
           </span>
         </li>
       ))}

@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ScheduleForm from "./ScheduleForm.jsx";
 import ScheduleList from "./ScheduleList.jsx";
 
 const ScheduleContainer = () => {
   const [schedules, setSchedules] = useState([]);
+  const [scheduleToEdit, setScheduleToEdit] = useState(null);
 
   const fetchSchedules = () => {
     fetch("/api/schedules")
@@ -31,13 +32,16 @@ const ScheduleContainer = () => {
   };
 
   const handleEditSchedule = (id) => {
-    // Implement edit functionality
-    console.log("Edit schedule with ID:", id);
+    const schedule = schedules.find((s) => s.id === id);
+    setScheduleToEdit(schedule);
   };
 
   return (
     <div>
-      <ScheduleForm onScheduleCreated={fetchSchedules} />
+      <ScheduleForm
+        onScheduleCreated={fetchSchedules}
+        scheduleToEdit={scheduleToEdit}
+      />
       <ScheduleList
         schedules={schedules}
         onDeleteSchedule={handleDeleteSchedule}
