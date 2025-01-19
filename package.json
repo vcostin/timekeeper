@@ -8,7 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "server": "node ./backend/server.js",
+    "server": "deno ./backend/server.js",
     "test": "deno test --filter \"/.test.[js|ts]/\"",
     "unit": "deno test --allow-read --parallel"
   },
@@ -26,7 +26,6 @@
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.2",
     "eslint": "^9.11.1",
-    "eslint-plugin-deno": "^0.0.1",
     "eslint-plugin-react": "^7.37.0",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.12",
