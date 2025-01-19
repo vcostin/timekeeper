@@ -6,9 +6,10 @@ const About = () => {
     <div className="About">
       <h1>About Schedule Manager</h1>
       <p>
-        Schedule Manager is a web application designed to help you manage your schedules efficiently. 
-        With Schedule Manager, you can create, edit, and delete schedules with ease. The application 
-        provides a user-friendly interface and powerful features to keep your schedules organized.
+        Schedule Manager is a web application designed to help you manage your
+        schedules efficiently. With Schedule Manager, you can create, edit, and
+        delete schedules with ease. The application provides a user-friendly
+        interface and powerful features to keep your schedules organized.
       </p>
       <h2>Features</h2>
       <ul>
@@ -25,7 +26,8 @@ const About = () => {
         <li>SQLite: For storing schedule data</li>
       </ul>
       <p>
-        Schedule Manager is designed to be simple and intuitive, making it easy for anyone to manage their schedules effectively.
+        Schedule Manager is designed to be simple and intuitive, making it easy
+        for anyone to manage their schedules effectively.
       </p>
     </div>
   );
