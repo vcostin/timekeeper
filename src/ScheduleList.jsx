@@ -1,5 +1,6 @@
 import React from "react";
 import "./ScheduleList.css";
+import { formatToLocalTime } from "../utilities/localization";
 
 const ScheduleList = ({ schedules }) => {
   return (
@@ -12,8 +13,8 @@ const ScheduleList = ({ schedules }) => {
       {schedules.map((schedule) => (
         <li key={schedule.id} className="item">
           <span>{schedule.name}</span>
-          <span>{schedule.openTime}</span>
-          <span>{schedule.closeTime}</span>
+          <span>{formatToLocalTime(schedule.openTime)}</span>
+          <span>{formatToLocalTime(schedule.closeTime)}</span>
           <span>{schedule.comment}</span>
           <span>
             <a href={schedule.url} target="_blank" rel="noopener noreferrer">

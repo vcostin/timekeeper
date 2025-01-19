@@ -1,6 +1,6 @@
 import express from "express";
 
-import Schedule from "./backend/shedule.model.js";
+import Schedule from "./shedule.model.js";
 
 const app = express();
 
