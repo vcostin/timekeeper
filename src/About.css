@@ -1,0 +1,41 @@
+.About {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #333;
+    color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .About h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #646cff;
+  }
+  
+  .About h2 {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: #535bf2;
+  }
+  
+  .About p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+  
+  .About ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+  }
+  
+  .About ul li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .About ul li::marker {
+    color: #646cff;
+  }
