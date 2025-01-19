@@ -1,12 +1,20 @@
 import React, { useState } from "react";
 import "./ScheduleForm.css";
 
-const ScheduleForm = () => {
+const ScheduleForm = ({ onScheduleCreated }) => {
   const [name, setName] = useState("");
   const [openTime, setOpenTime] = useState("");
   const [closeTime, setCloseTime] = useState("");
   const [comment, setComment] = useState("");
   const [url, setUrl] = useState("");
+
+  const cleanForm = () => {
+    setName("");
+    setOpenTime("");
+    setCloseTime("");
+    setComment("");
+    setUrl("");
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -25,7 +33,11 @@ const ScheduleForm = () => {
       body: JSON.stringify(scheduleData),
     })
       .then((response) => response.json())
-      .then((data) => console.log(data))
+      .then((data) => {
+        console.log(data);
+        onScheduleCreated();
+        cleanForm();
+      })
       .catch((error) => console.error(error));
   };
 
