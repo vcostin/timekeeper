@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
-import ScheduleForm from "./ScheduleForm.jsx";
 import Home from "./Home.jsx";
 import About from "./About.jsx";
 import ScheduleListContainer from "./ScheduleListContainer.jsx";

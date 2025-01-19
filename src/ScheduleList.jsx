@@ -1,6 +1,6 @@
-import React from "react";
+import React from "react"
 import "./ScheduleList.css";
-import { formatToLocalTime } from "../utilities/localization";
+import { formatToLocalTime } from "../utilities/localization.js";
 
 const ScheduleList = ({ schedules, onDeleteSchedule, onEditSchedule }) => {
   return (

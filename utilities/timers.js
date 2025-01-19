@@ -34,11 +34,13 @@ function clearTimers(scheduleId) {
 }
 
 // Example usage
-const scheduleId1 = "schedule1";
-const scheduleId2 = "schedule2";
+// const scheduleId1 = "schedule1";
+// const scheduleId2 = "schedule2";
 
-setTimer(scheduleId1, new Date("2025-01-15T10:00:00"));
-setTimer(scheduleId2, new Date("2025-01-16T10:00:00"));
+// setTimer(scheduleId1, new Date("2025-01-15T10:00:00"));
+// setTimer(scheduleId2, new Date("2025-01-16T10:00:00"));
 
 // To clear timers for a specific schedule
 // clearTimers(scheduleId1);
+
+export { clearTimers, setTimer, timers };
