@@ -25,6 +25,14 @@ function clearTimers(scheduleId) {
   }
 }
 
+// Function to clear all existing timers
+function clearAll() {
+  timers.forEach((timerIds, _scheduleId) => {
+    timerIds.forEach(clearTimeout);
+  });
+  timers.clear();
+}
+
 // Example usage
 // const scheduleId1 = "schedule1";
 // const scheduleId2 = "schedule2";
@@ -39,4 +47,4 @@ function clearTimers(scheduleId) {
 // To clear timers for a specific schedule
 // clearTimers(scheduleId1);
 
-export { clearTimers, setTimer, timers };
+export { clearTimers, setTimer, clearAll, timers };

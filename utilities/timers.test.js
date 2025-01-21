@@ -1,4 +1,4 @@
-import { clearTimers, setTimer, timers } from "./timers.js";
+import { clearTimers, setTimer, clearAll, timers } from "./timers.js";
 import { assertSpyCalls, spy } from "@std/testing/mock";
 import { FakeTime } from "@std/testing/time";
 
@@ -16,7 +16,7 @@ Deno.test("should set a timer for a specific schedule", () => {
   if (timers.get(scheduleId).length !== 1) {
     throw new Error("Timer count is incorrect");
   }
-
+  clearAll();
   time.restore();
 });
 
@@ -31,7 +31,7 @@ Deno.test("should not set a timer for a past date", () => {
   if (timers.has(scheduleId)) {
     throw new Error("Timer should not be set for a past date");
   }
-
+  clearAll();
   time.restore();
 });
 
@@ -47,7 +47,7 @@ Deno.test("should clear all timers for a specific schedule", () => {
   if (timers.has(scheduleId)) {
     throw new Error("Timers were not cleared");
   }
-
+  clearAll();
   time.restore();
 });
 
@@ -62,6 +62,6 @@ Deno.test("should execute the function at the specific time", () => {
   time.tick(1000);
 
   assertSpyCalls(executeSpy, 1);
-
+  clearAll();
   time.restore();
 });
