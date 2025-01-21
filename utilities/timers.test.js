@@ -6,8 +6,9 @@ Deno.test("should set a timer for a specific schedule", () => {
   const time = new FakeTime();
   const scheduleId = "schedule1";
   const targetDate = new Date(Date.now() + 1000); // 1 second in the future
+  const callback = () => {};
 
-  setTimer(scheduleId, targetDate);
+  setTimer(scheduleId, targetDate, callback);
 
   if (!timers.has(scheduleId)) {
     throw new Error("Timer was not set");
@@ -23,8 +24,9 @@ Deno.test("should not set a timer for a past date", () => {
   const time = new FakeTime();
   const scheduleId = "schedule2";
   const targetDate = new Date(Date.now() - 1000); // 1 second in the past
+  const callback = () => {};
 
-  setTimer(scheduleId, targetDate);
+  setTimer(scheduleId, targetDate, callback);
 
   if (timers.has(scheduleId)) {
     throw new Error("Timer should not be set for a past date");
@@ -37,8 +39,9 @@ Deno.test("should clear all timers for a specific schedule", () => {
   const time = new FakeTime();
   const scheduleId = "schedule3";
   const targetDate = new Date(Date.now() + 1000); // 1 second in the future
+  const callback = () => {};
 
-  setTimer(scheduleId, targetDate);
+  setTimer(scheduleId, targetDate, callback);
   clearTimers(scheduleId);
 
   if (timers.has(scheduleId)) {
@@ -51,12 +54,10 @@ Deno.test("should clear all timers for a specific schedule", () => {
 Deno.test("should execute the function at the specific time", () => {
   const time = new FakeTime();
   const scheduleId = "schedule4";
-//   const targetDate = new Date(Date.now() + 1000); // 1 second in the future
+  const targetDate = new Date(Date.now() + 1000); // 1 second in the future
   const executeSpy = spy(() => {});
 
-  timers.set(scheduleId, [
-    setTimeout(executeSpy, 1000),
-  ]);
+  setTimer(scheduleId, targetDate, executeSpy);
 
   time.tick(1000);
 

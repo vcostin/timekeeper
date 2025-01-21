@@ -1,20 +1,12 @@
 const timers = new Map();
 
-// Function to be executed at the specific date and time
-function executeAtSpecificTime(scheduleId) {
-  console.log(`The specific time for schedule ${scheduleId} has arrived!`);
-}
-
 // Function to set a timer for a specific schedule
-function setTimer(scheduleId, targetDate) {
+function setTimer(scheduleId, targetDate, callback) {
   const currentDate = new Date();
   const timeDifference = targetDate - currentDate;
 
   if (timeDifference > 0) {
-    const timerId = setTimeout(
-      () => executeAtSpecificTime(scheduleId),
-      timeDifference,
-    );
+    const timerId = setTimeout(callback, timeDifference);
 
     if (!timers.has(scheduleId)) {
       timers.set(scheduleId, []);
@@ -37,10 +29,14 @@ function clearTimers(scheduleId) {
 // const scheduleId1 = "schedule1";
 // const scheduleId2 = "schedule2";
 
-// setTimer(scheduleId1, new Date("2025-01-15T10:00:00"));
-// setTimer(scheduleId2, new Date("2025-01-16T10:00:00"));
+// setTimer(scheduleId1, new Date("2025-01-15T10:00:00"), () => {
+//   console.log(`The specific time for schedule ${scheduleId1} has arrived!`);
+// });
+// setTimer(scheduleId2, new Date("2025-01-16T10:00:00"), () => {
+//   console.log(`The specific time for schedule ${scheduleId2} has arrived!`);
+// });
 
 // To clear timers for a specific schedule
 // clearTimers(scheduleId1);
 
-export { clearTimers, setTimer, timers };
+export { setTimer, clearTimers, timers };
