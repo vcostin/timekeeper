@@ -39,4 +39,4 @@ function clearTimers(scheduleId) {
 // To clear timers for a specific schedule
 // clearTimers(scheduleId1);
 
-export { setTimer, clearTimers, timers };
+export { clearTimers, setTimer, timers };

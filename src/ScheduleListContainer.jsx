@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ScheduleForm from "./ScheduleForm.jsx";
 import ScheduleList from "./ScheduleList.jsx";
 

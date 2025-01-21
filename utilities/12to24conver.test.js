@@ -1,7 +1,4 @@
-import {
-  assertEquals,
-  assertThrows,
-} from "https://deno.land/std/testing/asserts.ts";
+import { assertEquals, assertThrows } from "@std/assert";
 import { convertTo24HourFormat } from "./12to24convert.js";
 
 Deno.test("convertTo24HourFormat - valid inputs", () => {

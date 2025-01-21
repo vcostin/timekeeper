@@ -1,4 +1,4 @@
-import { assertEquals } from "https://deno.land/std/testing/asserts.ts";
+import { assertEquals } from "@std/assert";
 import { CHISINAU_OPTIONS, formatToLocalTime } from "./localization.js";
 
 Deno.test("formatToLocalTime - valid ISO string", () => {
