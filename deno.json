@@ -1,5 +1,10 @@
 {
   "nodeModulesDir": "auto",
+  "name": "@vcostin/timekeeper",
+  "description": "TimeKeeper is a web application designed to help you manage your schedules efficiently.",
+  "exports": {
+    "./": "./src/index.js"
+  },
   "tasks": {
     "dev": "deno run -A --node-modules-dir npm:vite",
     "build": "deno run -A --node-modules-dir npm:vite build",
