@@ -1,30 +1,28 @@
 import { internallAppLog } from "../utilities/message.js";
 import { closeApp, openApp } from "./sysDenoProc.js";
 
-const scheduleOpenSet = ({ name, url, comment }) => {
+const setScheduleOpen = ({ name, url, comment }) => {
   internallAppLog(
     `Setting schedule ${name} to open with the url: ${url}. Notes: ${comment}`,
   );
   return openApp(url);
 };
-const scheduleCloseSet = ({ name, url }) => {
+const setScheduleClose = ({ name, url }) => {
   internallAppLog(`Setting schedule ${name} to close with the url: ${url}.`);
   return closeApp(url);
 };
 
 const scheduleConvert = (schedule) => {
   const { openTime, closeTime, id, name, url, comment } = schedule;
-  const openDate = new Date(openTime);
-  const closeDate = new Date(closeTime);
 
   return {
     id,
     name,
     url,
     comment,
-    openDate,
-    closeDate,
+    openTime: new Date(openTime),
+    closeTime: new Date(closeTime),
   };
 };
 
-export { scheduleCloseSet, scheduleConvert, scheduleOpenSet };
+export { setScheduleClose, scheduleConvert, setScheduleOpen };

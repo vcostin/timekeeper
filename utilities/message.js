@@ -6,4 +6,4 @@ const internallAppError = (message) => {
   console.error(message);
 };
 
-export { internallAppLog, internallAppError };
+export { internallAppError, internallAppLog };

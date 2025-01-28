@@ -8,9 +8,9 @@ import {
   updateTimer,
 } from "../utilities/timers.js";
 import {
-  scheduleCloseSet,
+  setScheduleClose,
   scheduleConvert,
-  scheduleOpenSet,
+  setScheduleOpen,
 } from "./scheduleTool.js";
 import { internallAppError, internallAppLog } from "../utilities/message.js";
 
@@ -51,13 +51,13 @@ app.post("/api/schedules", async (req, res) => {
       sheduleData.id,
       sheduleData.openTime,
       "openTime",
-      scheduleOpenSet(sheduleData),
+      setScheduleOpen(sheduleData),
     );
     setTimer(
       sheduleData.id,
       sheduleData.closeTime,
       "closeTime",
-      scheduleCloseSet(sheduleData),
+      setScheduleClose(sheduleData),
     );
     res.json(schedule);
   } else {
@@ -75,13 +75,13 @@ app.patch("/api/schedules/:id", async (req, res) => {
       sheduleData.id,
       sheduleData.openTime,
       "openTime",
-      scheduleOpenSet(sheduleData),
+      setScheduleOpen(sheduleData),
     );
     updateTimer(
       sheduleData.id,
       sheduleData.closeTime,
       "closeTime",
-      scheduleCloseSet(sheduleData),
+      setScheduleClose(sheduleData),
     );
     res.json(schedule);
   } else {
@@ -108,6 +108,7 @@ app.listen(3000, async () => {
   // Fetch schedules from the database
   const schedules = await Schedule.findAll();
   const scheduleData = schedules.map(scheduleConvert);
+  console.log(scheduleData);
 
   // Set timers for each schedule
   scheduleData.forEach((schedule) => {
@@ -115,13 +116,13 @@ app.listen(3000, async () => {
       schedule.id,
       schedule.openTime,
       "openTime",
-      scheduleOpenSet(schedule),
+      setScheduleOpen(schedule),
     );
     setTimer(
       schedule.id,
       schedule.closeTime,
       "closeTime",
-      scheduleCloseSet(schedule),
+      setScheduleClose(schedule),
     );
   });
 });

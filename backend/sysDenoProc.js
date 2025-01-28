@@ -1,4 +1,4 @@
-import { internallAppLog } from "../utilities/message.js";
+import { internallAppError, internallAppLog } from "../utilities/message.js";
 
 function openApp(url) {
   const script = `
@@ -11,7 +11,7 @@ function openApp(url) {
       .outputSync();
 
     if (proc.error) {
-      console.error(`Error opening application: ${proc.error}`);
+      internallAppError(`Error opening application: ${proc.error}`);
       return;
     }
     internallAppLog(`Application ${url} opened successfully`);
@@ -29,7 +29,7 @@ function closeApp(url) {
       .outputSync();
 
     if (proc.error) {
-      console.error(`Error closing tab: ${proc.error.message}`);
+      internallAppError(`Error closing tab: ${proc.error.message}`);
       return;
     }
     internallAppLog(`Tab ${url} closed successfully`);
