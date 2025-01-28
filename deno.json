@@ -5,7 +5,7 @@
     "build": "deno run -A --node-modules-dir npm:vite build",
     "preview": "deno run -A --node-modules-dir npm:vite preview",
     "serve": "deno run --allow-net --allow-read jsr:@std/http@1/file-server dist/",
-    "server": "deno ./backend/server.js",
+    "server": "deno run --allow-net --allow-read --allow-write --allow-env --allow-sys --allow-ffi ./backend/server.js",
     "test": "deno test --filter \"/.test.[js|ts]/\"",
     "unit": "deno test --allow-read --parallel"
   },

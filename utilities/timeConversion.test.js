@@ -18,6 +18,5 @@ Deno.test("convertTimesToISO - valid input", () => {
 
 Deno.test("convertTimesToISO - invalid input", () => {
   const input = "Friday, Oct 18 @ 25am - 11am ET";
-  //   console.log(convertTimesToISO(input))
   assertThrows(() => convertTimesToISO(input), Error, "Invalid time format");
 });

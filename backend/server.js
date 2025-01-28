@@ -1,7 +1,17 @@
 import express from "express";
 
 import Schedule from "./shedule.model.js";
-import { clearAll } from "../utilities/timers.js";
+import {
+  clearAll,
+  clearTimers,
+  setTimer,
+  updateTimer,
+} from "../utilities/timers.js";
+import {
+  scheduleCloseSet,
+  scheduleConvert,
+  scheduleOpenSet,
+} from "./scheduleTool.js";
 
 const app = express();
 
@@ -22,7 +32,7 @@ app.get("/api/schedules", (_req, res) => {
     });
 });
 
-app.post("/api/schedules", (req, res) => {
+app.post("/api/schedules", async (req, res) => {
   console.log(req.body);
 
   const { name, openTime, closeTime, comment, url } = req.body;
@@ -34,14 +44,26 @@ app.post("/api/schedules", (req, res) => {
     url,
   };
 
-  Schedule.create(newSchedule)
-    .then((schedule) => {
-      console.log("Schedule created:", schedule);
-      res.json(schedule);
-    })
-    .catch((error) => {
-      console.error("Error creating schedule:", error);
-    });
+  const schedule = await Schedule.create(newSchedule);
+  if (schedule) {
+    console.log("Schedule created:", schedule);
+    const sheduleData = scheduleConvert(schedule);
+    setTimer(
+      sheduleData.id,
+      sheduleData.openTime,
+      "openTime",
+      scheduleOpenSet(sheduleData),
+    );
+    setTimer(
+      sheduleData.id,
+      sheduleData.closeTime,
+      "closeTime",
+      scheduleCloseSet(sheduleData),
+    );
+    res.json(schedule);
+  } else {
+    res.status(500).send({ error: "Error creating schedule" });
+  }
 });
 
 app.patch("/api/schedules/:id", async (req, res) => {
@@ -49,6 +71,19 @@ app.patch("/api/schedules/:id", async (req, res) => {
   const schedule = await Schedule.findByPk(id);
   if (schedule) {
     await schedule.update(req.body);
+    const sheduleData = scheduleConvert(schedule);
+    updateTimer(
+      sheduleData.id,
+      sheduleData.openTime,
+      "openTime",
+      scheduleOpenSet(sheduleData),
+    );
+    updateTimer(
+      sheduleData.id,
+      sheduleData.closeTime,
+      "closeTime",
+      scheduleCloseSet(sheduleData),
+    );
     res.json(schedule);
   } else {
     res.status(404).send({ error: "Schedule not found" });
@@ -60,15 +95,36 @@ app.delete("/api/schedules/:id", async (req, res) => {
   const schedule = await Schedule.findByPk(id);
   if (schedule) {
     await schedule.destroy();
+    clearTimers(id);
     res.status(204).send();
   } else {
     res.status(404).send({ error: "Schedule not found" });
   }
 });
 
-app.listen(3000, () => {
-  Schedule.sync({ alter: true });
+app.listen(3000, async () => {
+  await Schedule.sync({ alter: true });
   console.log("Server listening on port 3000!");
+
+  // Fetch schedules from the database
+  const schedules = await Schedule.findAll();
+  const scheduleData = schedules.map(scheduleConvert);
+
+  // Set timers for each schedule
+  scheduleData.forEach((schedule) => {
+    setTimer(
+      schedule.id,
+      schedule.openTime,
+      "openTime",
+      scheduleOpenSet(schedule),
+    );
+    setTimer(
+      schedule.id,
+      schedule.closeTime,
+      "closeTime",
+      scheduleCloseSet(schedule),
+    );
+  });
 });
 
 // Handle Ctrl + C (SIGINT) to clear intervals
