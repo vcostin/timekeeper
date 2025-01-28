@@ -1,3 +1,5 @@
+import { internallAppLog } from "../utilities/message.js";
+
 function openApp(url) {
   const script = `
       tell application "Microsoft Edge"
@@ -12,7 +14,7 @@ function openApp(url) {
       console.error(`Error opening application: ${proc.error}`);
       return;
     }
-    console.log(`Application ${url} opened successfully`);
+    internallAppLog(`Application ${url} opened successfully`);
   };
 }
 
@@ -30,7 +32,7 @@ function closeApp(url) {
       console.error(`Error closing tab: ${proc.error.message}`);
       return;
     }
-    console.log(`Tab ${url} closed successfully`);
+    internallAppLog(`Tab ${url} closed successfully`);
   };
 }
 

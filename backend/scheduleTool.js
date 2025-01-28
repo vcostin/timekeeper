@@ -1,13 +1,14 @@
+import { internallAppLog } from "../utilities/message.js";
 import { closeApp, openApp } from "./sysDenoProc.js";
 
 const scheduleOpenSet = ({ name, url, comment }) => {
-  console.log(
+  internallAppLog(
     `Setting schedule ${name} to open with the url: ${url}. Notes: ${comment}`,
   );
   return openApp(url);
 };
 const scheduleCloseSet = ({ name, url }) => {
-  console.log(`Setting schedule ${name} to close with the url: ${url}.`);
+  internallAppLog(`Setting schedule ${name} to close with the url: ${url}.`);
   return closeApp(url);
 };
 

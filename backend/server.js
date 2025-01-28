@@ -12,6 +12,7 @@ import {
   scheduleConvert,
   scheduleOpenSet,
 } from "./scheduleTool.js";
+import { internallAppError, internallAppLog } from "../utilities/message.js";
 
 const app = express();
 
@@ -27,14 +28,12 @@ app.get("/api/schedules", (_req, res) => {
       res.json({ schedules });
     })
     .catch((error) => {
-      console.log(error);
+      internallAppError(error);
       res.status(500).json({ message: "Error retrieving schedules" });
     });
 });
 
 app.post("/api/schedules", async (req, res) => {
-  console.log(req.body);
-
   const { name, openTime, closeTime, comment, url } = req.body;
   const newSchedule = {
     name,
@@ -46,7 +45,7 @@ app.post("/api/schedules", async (req, res) => {
 
   const schedule = await Schedule.create(newSchedule);
   if (schedule) {
-    console.log("Schedule created:", schedule);
+    internallAppLog("Schedule created:", schedule);
     const sheduleData = scheduleConvert(schedule);
     setTimer(
       sheduleData.id,
@@ -104,7 +103,7 @@ app.delete("/api/schedules/:id", async (req, res) => {
 
 app.listen(3000, async () => {
   await Schedule.sync({ alter: true });
-  console.log("Server listening on port 3000!");
+  internallAppLog("Server listening on port 3000!");
 
   // Fetch schedules from the database
   const schedules = await Schedule.findAll();
@@ -130,6 +129,6 @@ app.listen(3000, async () => {
 // Handle Ctrl + C (SIGINT) to clear intervals
 Deno.addSignalListener("SIGINT", () => {
   clearAll();
-  console.log("Intervals cleared. Exiting...");
+  internallAppLog("Intervals cleared. Exiting...");
   Deno.exit();
 });
