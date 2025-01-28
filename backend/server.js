@@ -1,6 +1,7 @@
 import express from "express";
 
 import Schedule from "./shedule.model.js";
+import { clearAll } from "../utilities/timers.js";
 
 const app = express();
 
@@ -68,4 +69,11 @@ app.delete("/api/schedules/:id", async (req, res) => {
 app.listen(3000, () => {
   Schedule.sync({ alter: true });
   console.log("Server listening on port 3000!");
+});
+
+// Handle Ctrl + C (SIGINT) to clear intervals
+Deno.addSignalListener("SIGINT", () => {
+  clearAll();
+  console.log("Intervals cleared. Exiting...");
+  Deno.exit();
 });
