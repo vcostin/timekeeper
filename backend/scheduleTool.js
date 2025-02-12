@@ -25,4 +25,4 @@ const scheduleConvert = (schedule) => {
   };
 };
 
-export { setScheduleClose, scheduleConvert, setScheduleOpen };
+export { scheduleConvert, setScheduleClose, setScheduleOpen };

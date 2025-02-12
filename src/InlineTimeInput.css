@@ -1,0 +1,47 @@
+:root {
+  --primary-color: #0078d4;
+  --secondary-color: #2d2d2d;
+  --background-color: #f3f3f3;
+  --spacing: 16px;
+}
+
+.inline-time-input {
+  background-color: var(--background-color);
+  padding: var(--spacing);
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+.inline-time-input .info h2 {
+  color: var(--primary-color);
+  margin-bottom: calc(var(--spacing) / 2);
+}
+
+.inline-time-input .info p {
+  color: var(--secondary-color);
+  margin: 0 0 calc(var(--spacing) / 2) 0;
+}
+
+.inline-time-input .input {
+  margin-top: var(--spacing);
+}
+
+.inline-time-input .input label {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--secondary-color);
+}
+
+.inline-time-input .input input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.inline-time-input .message {
+  margin-top: var(--spacing);
+  color: red;
+  font-weight: bold;
+}

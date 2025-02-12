@@ -8,8 +8,8 @@ import {
   updateTimer,
 } from "../utilities/timers.js";
 import {
-  setScheduleClose,
   scheduleConvert,
+  setScheduleClose,
   setScheduleOpen,
 } from "./scheduleTool.js";
 import { internallAppError, internallAppLog } from "../utilities/message.js";

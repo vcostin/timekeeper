@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import "./ScheduleForm.css";
 
-const ScheduleForm = ({ onScheduleCreated, scheduleToEdit }) => {
+const ScheduleForm = (
+  { onScheduleCreated, scheduleToEdit, inlineOpenTime, inlineCloseTime },
+) => {
   const [name, setName] = useState("");
   const [openTime, setOpenTime] = useState("");
   const [closeTime, setCloseTime] = useState("");
@@ -22,6 +24,18 @@ const ScheduleForm = ({ onScheduleCreated, scheduleToEdit }) => {
       setIsEditing(false);
     }
   }, [scheduleToEdit]);
+
+  useEffect(() => {
+    if (inlineOpenTime) {
+      setOpenTime(inlineOpenTime);
+    }
+  }, [inlineOpenTime]);
+
+  useEffect(() => {
+    if (inlineCloseTime) {
+      setCloseTime(inlineCloseTime);
+    }
+  }, [inlineCloseTime]);
 
   const cleanForm = () => {
     setName("");
